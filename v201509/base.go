@@ -19,7 +19,7 @@ const (
 	baseMcmUrl 				= "https://adwords.google.com/api/adwords/mcm/v201509"
 	rootRemarketingUrl    	= "https://adwords.google.com/api/adwords/rm/"
 	baseRemarketingUrl    	= "https://adwords.google.com/api/adwords/rm/v201509"
-	reportUrl = "https://adwords.google.com/api/adwords/reportdownload/v201509"
+	reportUrl 				= "https://adwords.google.com/api/adwords/reportdownload/v201509"
 )
 
 type ServiceUrl struct {

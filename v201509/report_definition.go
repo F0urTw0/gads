@@ -28,17 +28,17 @@ func NewReportDefinitionService(auth *Auth) *ReportDefinitionService {
 }
 
 func (s *ReportDefinitionService) Get(selector Selector) (reports []ReportDefinitionField, totalCount int64, err error) {
-	selector.XMLName = xml.Name{"", "reportType"}
+	selector.XMLName = xml.Name{"", "serviceSelector"}
 	respBody, err := s.Auth.request(
 		reportDefinitionServiceUrl,
-		"getReportFields",
+		"get",
 			struct {
 			XMLName xml.Name
 			Sel     Selector
 		}{
 			XMLName: xml.Name{
 				Space: baseUrl,
-				Local: "getReportFields",
+				Local: "get",
 			},
 			Sel: selector,
 		},
