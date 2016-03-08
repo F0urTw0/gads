@@ -2,10 +2,12 @@ package v201509
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"os"
 	"testing"
 )
@@ -17,6 +19,7 @@ const (
 	baseMcmUrl 				= "https://adwords.google.com/api/adwords/mcm/v201509"
 	rootRemarketingUrl    	= "https://adwords.google.com/api/adwords/rm/"
 	baseRemarketingUrl    	= "https://adwords.google.com/api/adwords/rm/v201509"
+	reportUrl = "https://adwords.google.com/api/adwords/reportdownload/v201509"
 )
 
 type ServiceUrl struct {
@@ -126,6 +129,58 @@ type AWQLQuery struct {
 // error parsers
 func selectorError() (err error) {
 	return err
+}
+
+func (a *Auth) downloadReportRequest(body interface{}) (respBody []byte, err error) {
+	reqBody, err := xml.MarshalIndent(body, "  ", "  ")
+	if err != nil {
+		return []byte{}, err
+	}
+
+	form := url.Values{}
+	form.Add("__rdxml", string(reqBody))
+
+	req, err := http.NewRequest("POST", reportUrl, bytes.NewBufferString(form.Encode()))
+	req.Header.Add("User-Agent", a.UserAgent)
+	req.Header.Add("clientCustomerId", a.CustomerId)
+	req.Header.Add("developerToken", a.DeveloperToken)
+	req.Header.Add("Accept", "*/*")
+	req.Header.Add("Accept-Encoding", "gzip")
+	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	contentLength := fmt.Sprintf("%d", len(reqBody))
+	req.Header.Add("Content-length", contentLength)
+
+	if a.Testing != nil {
+		a.Testing.Logf("request ->\n%s\n%#v\n%s\n", req.URL.String(), req.Header, string(reqBody))
+	}
+
+	resp, err := a.Client.Do(req)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	reader, err := gzip.NewReader(resp.Body)
+	if err != nil {
+		return []byte{}, err
+	}
+	defer reader.Close()
+
+	respBody, err = ioutil.ReadAll(reader)
+	if a.Testing != nil {
+		a.Testing.Logf("respBody ->\n%s\n%s\n", string(respBody), resp.Status)
+	}
+
+	if resp.StatusCode == 400 || resp.StatusCode == 401 || resp.StatusCode == 403 || resp.StatusCode == 405 || resp.StatusCode == 500 {
+		reportDownloadError := ReportDownloadError{}
+		fmt.Printf("unknown error ->\n%s\n", string(respBody))
+		err = xml.Unmarshal(respBody, &reportDownloadError)
+		if err != nil {
+			return respBody, fmt.Errorf("%v \nRespone:%s", err.Error(), respBody)
+		}
+		return respBody, reportDownloadError
+	}
+
+	return respBody, nil
 }
 
 func (a *Auth) request(serviceUrl ServiceUrl, action string, body interface{}) (respBody []byte, err error) {
