@@ -143,3 +143,14 @@ type Fault struct {
 func (f Fault) Error() string {
 	return f.FaultString + " - " + f.Errors.Error()
 }
+
+type ReportDownloadError struct {
+	XMLName   xml.Name `xml:"reportDownloadError"`
+	Type      string   `xml:"ApiError>type"`
+	Trigger   string   `xml:"ApiError>trigger"`
+	FieldPath string   `xml:"ApiError>fieldPath"`
+}
+
+func (f ReportDownloadError) Error() string {
+	return fmt.Sprintf("Type = '%s', Trigger = '%s', FieldPath = '%s'", f.Type, f.Trigger, f.FieldPath)
+}

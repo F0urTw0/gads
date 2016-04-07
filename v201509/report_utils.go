@@ -1,6 +1,8 @@
 package v201509
 
-import "encoding/xml"
+import (
+	"encoding/xml"
+)
 
 const (
 	DATE_RANGE_TODAY               = "TODAY"
@@ -110,11 +112,11 @@ type CampaignRow struct {
 	DayOfWeek                                                 string       `xml:"dayOfWeek,attr"`
 	Device                                                    string       `xml:"device,attr"`
 	EndDate                                                   string       `xml:"endDate,attr"`
-	EngagementRate                                            float64      `xml:"endDate,attr"`
+	EngagementRate                                            float64      `xml:"engagementRate,attr"`
 	Engagements                                               int64        `xml:"engagements,attr"`
 	EnhancedCpcEnabled                                        string       `xml:"enhancedCPCEnabled,attr"`
 	EnhancedCpvEnabled                                        string       `xml:"enhancedCPVEnabled,attr"`
-	ExternalCustomerId                                        int64        `xml:"engagements,attr"`
+	ExternalCustomerId                                        int64        `xml:"customerID,attr"`
 	GmailForwards                                             int64        `xml:"gmailForwards,attr"`
 	GmailSaves                                                int64        `xml:"gmailSaves,attr"`
 	GmailSecondaryClicks                                      int64        `xml:"gmailClicksToWebsite,attr"`
@@ -155,10 +157,10 @@ type CampaignRow struct {
 	ValuePerAllConversion                                     float64      `xml:"valueAllConv,attr"`
 	ValuePerConversion                                        float64      `xml:"valueConv,attr"`
 	ValuePerConvertedClick                                    int64        `xml:"valueConvertedClick,attr"`
-	VideoQuartile100Rate                                      float64      `xml:"videoPlayedTo100,attr"`
 	VideoQuartile25Rate                                       float64      `xml:"videoPlayedTo25,attr"`
 	VideoQuartile50Rate                                       float64      `xml:"videoPlayedTo50,attr"`
 	VideoQuartile75Rate                                       float64      `xml:"videoPlayedTo75,attr"`
+	VideoQuartile100Rate                                      float64      `xml:"videoPlayedTo100,attr"`
 	VideoViewRate                                             float64      `xml:"viewRate,attr"`
 	VideoViews                                                int64        `xml:"views,attr"`
 	ViewThroughConversions                                    int64        `xml:"viewThroughConv,attr"`
