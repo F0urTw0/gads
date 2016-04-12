@@ -325,6 +325,68 @@ type AdGroupRow struct {
 	Year                                                      int64        `xml:"year,attr"`
 }
 
+type AdPerformanceRows []*AdPerformanceRow
+
+type AdPerformanceReport struct {
+	XMLName xml.Name     `xml:"report"`
+	Rows    AdGroupRows `xml:"table>row"`
+
+}
+
+type AdPerformanceRow struct {
+	XMLName                    xml.Name     `xml:"row"`
+	AccountCurrencyCode            string       `xml:"currency,attr"`
+	AccountDescriptiveName         string       `xml:"account,attr"`
+	AccountTimeZoneId              string       `xml:"timeZone,attr"`
+	AdGroupId                      string       `xml:"adGroupID,attr"`
+	AdGroupName                    string       `xml:"adGroup,attr"`
+	AdGroupStatus                  string       `xml:"adGroupState,attr"`
+	AdNetworkType1                 string       `xml:"network,attr"`
+	AdNetworkType2                 string       `xml:"networkWithSearchPartners,attr"`
+	AdType                         string       `xml:"adType,attr"`
+	AllConversions                 float64      `xml:"allConv,attr"`
+	AllConversionValue             float64      `xml:"allConvValue,attr"`
+	CampaignId                     string       `xml:"campaignID,attr"`
+	CampaignName                   string       `xml:"campaign,attr"`
+	CampaignStatus                 string       `xml:"campaignState,attr"`
+	BaseAdGroupId                  float64      `xml:"baseAdGroupID,attr"`
+	BaseCampaignId                 string       `xml:"baseCampaignID,attr"`
+	Clicks                         int64        `xml:"clicks,attr"`
+	Conversions                    int64        `xml:"conversions,attr"`
+	ConvertedClicks                int64        `xml:"convertedClicks,attr"`
+	Cost                           int64        `xml:"cost,attr"`
+	CreativeApprovalStatus         string       `xml:"adApprovalStatus,attr"`
+	CreativeDestinationUrl         string       `xml:"destinationURL,attr"`
+	Date                           string       `xml:"day,attr"`
+	Description1                   string       `xml:"descriptionLine1,attr"`
+	Description2                   string       `xml:"descriptionLine2,attr"`
+	Device                         string       `xml:"device,attr"`
+	DevicePreference               string       `xml:"devicePreference,attr"`
+	DisplayUrl                     string       `xml:"displayURL,attr"`
+	Engagements                    int64        `xml:"engagements,attr"`
+	ExternalCustomerId             string       `xml:"customerID,attr"`
+	GmailForwards                  int64        `xml:"gmailForwards,attr"`
+	GmailSaves                     int64        `xml:"gmailSaves,attr"`
+	GmailSecondaryClicks           int64        `xml:"gmailClicksToWebsite,attr"`
+	Headline                       string       `xml:"ad,attr"`
+	Id                             int64        `xml:"adID,attr"`
+	ImageAdUrl                     string       `xml:"imageAdURL,attr"`
+	ImageCreativeName              string       `xml:"imageAdName,attr"`
+	Impressions                    int64        `xml:"impressions,attr"`
+	Interactions                   int64        `xml:"interactions,attr"`
+	IsNegative                     string       `xml:"isNegative,attr"`
+	KeywordId                      string       `xml:"keywordID,attr"`
+	LabelIds                       string       `xml:"labelIDs,attr"`
+	Labels                         string       `xml:"labels,attr"`
+	Status                         string       `xml:"adState,attr"`
+	Trademarks                     string       `xml:"trademarks,attr"`
+	VideoQuartile25Rate            float64      `xml:"videoPlayedTo25,attr"`
+	VideoQuartile50Rate            float64      `xml:"videoPlayedTo50,attr"`
+	VideoQuartile75Rate            float64      `xml:"videoPlayedTo75,attr"`
+	VideoQuartile100Rate           float64      `xml:"videoPlayedTo100,attr"`
+	VideoViews                     int64        `xml:"views,attr"`
+}
+
 type AdGroupRows []*AdGroupRow
 
 func (adGroupRows *AdGroupRows) UnmarshalXML(dec *xml.Decoder, start xml.StartElement) error {
@@ -367,6 +429,43 @@ type BudgetRow struct {
 	Impressions int64    `xml:"impressions,attr"`
 	Conversions int64    `xml:"conversions,attr"`
 }
+
+type PlaceholderReport struct {
+	XMLName xml.Name       `xml:"report"`
+	Rows    PlaceholderRows  `xml:"table>row"`
+}
+
+type PlaceholderRow struct {
+	XMLName                        xml.Name     `xml:"row"`
+	AccountCurrencyCode            string       `xml:"currency,attr"`
+	AccountDescriptiveName         string       `xml:"account,attr"`
+	AccountTimeZoneId              string       `xml:"timeZone,attr"`
+	AdGroupId                      string       `xml:"adGroupID,attr"`
+	AdGroupName                    string       `xml:"adGroup,attr"`
+	AdGroupStatus                  string       `xml:"adGroupState,attr"`
+	AdNetworkType1                 string       `xml:"network,attr"`
+	AdNetworkType2                 string       `xml:"networkWithSearchPartners,attr"`
+	AllConversions                 float64      `xml:"allConv,attr"`
+	AllConversionValue             float64      `xml:"allConvValue,attr"`
+	CampaignId                     string       `xml:"campaignID,attr"`
+	CampaignName                   string       `xml:"campaign,attr"`
+	CampaignStatus                 string       `xml:"campaignState,attr"`
+	Clicks                         int64        `xml:"clicks,attr"`
+	Conversions                    int64        `xml:"conversions,attr"`
+	ConversionValue                float64      `xml:"totalConvValue,attr"`
+	Cost                           int64        `xml:"cost,attr"`
+	Criteria                       string       `xml:"placement,attr"`
+	CrossDeviceConversions         float64      `xml:"crossDeviceConv,attr"`
+	CustomerDescriptiveName        string       `xml:"clientName,attr"`
+	Date                           string       `xml:"day,attr"`
+	Device                         string       `xml:"device,attr"`
+	Engagements                    int64        `xml:"engagements,attr"`
+	ExternalCustomerId             string       `xml:"customerID,attr"`
+	Impressions                    int64        `xml:"impressions,attr"`
+	Interactions                   int64        `xml:"interactions,attr"`
+	VideoViews                     int64        `xml:"views,attr"`
+}
+type PlaceholderRows []*PlaceholderRow
 
 type PlacementReport struct {
 	XMLName xml.Name       `xml:"report"`
@@ -431,6 +530,188 @@ type PlacementRow struct {
 }
 
 type PlacementRows []*PlacementRow
+
+type VideoPerformanceReport struct {
+	XMLName xml.Name       `xml:"report"`
+	Rows    VideoPerformanceRows  `xml:"table>row"`
+}
+
+type VideoPerformanceRow struct {
+	XMLName                  xml.Name   `xml:"row"`
+	AdGroupId                string     `xml:"adGroupID,attr"`
+	AdGroupName              string     `xml:"adGroup,attr"`
+	AdGroupStatus            string     `xml:"adGroupState,attr"`
+	AdNetworkType1           string     `xml:"network,attr"`
+	AdNetworkType2           string     `xml:"networkWithSearchPartners,attr"`
+	CampaignId               string     `xml:"campaignID,attr"`
+	CampaignName             string     `xml:"campaign,attr"`
+	CampaignStatus           string     `xml:"campaignState,attr"`
+	Clicks                   int64      `xml:"clicks,attr"`
+	Conversions              int64      `xml:"conversions,attr"`
+	ConversionValue          float64    `xml:"totalConvValue,attr"`
+	Cost                     int64      `xml:"cost,attr"`
+	CreativeId               int64      `xml:"adID,attr"`
+	CreativeStatus           string     `xml:"adState,attr"`
+	Date                     string     `xml:"day,attr"`
+	Device                   string     `xml:"device,attr"`
+	Engagements              int64      `xml:"engagements,attr"`
+	Impressions              int64      `xml:"impressions,attr"`
+	VideoChannelId           string     `xml:"videoChannelId,attr"`
+	VideoId                  string     `xml:"videoId,attr"`
+	VideoQuartile100Rate     float64    `xml:"videoPlayedTo100,attr"`
+	VideoQuartile25Rate      float64    `xml:"videoPlayedTo25,attr"`
+	VideoQuartile50Rate      float64    `xml:"videoPlayedTo50,attr"`
+	VideoQuartile75Rate      float64    `xml:"videoPlayedTo75,attr"`
+	VideoTitle               string     `xml:"videoTitle,attr"`
+	VideoViews               int64      `xml:"views,attr"`
+	ViewThroughConversions   int64      `xml:"viewThroughConv,attr"`
+}
+
+type VideoPerformanceRows []*VideoPerformanceRow
+
+type GeoPerformanceReport struct {
+	XMLName xml.Name       `xml:"report"`
+	Rows    GeoPerformanceRows  `xml:"table>row"`
+}
+
+type GeoPerformanceRow struct {
+	XMLName                             xml.Name     `xml:"row"`
+	AccountCurrencyCode                 string       `xml:"currency,attr"`
+	AccountDescriptiveName              string       `xml:"account,attr"`
+	AccountTimeZoneId                   string       `xml:"timeZone,attr"`
+	AdFormat                            string       `xml:"adType,attr"`
+	AdGroupId                           string       `xml:"adGroupID,attr"`
+	AdGroupName                         string       `xml:"adGroup,attr"`
+	AdGroupStatus                       string       `xml:"adGroupState,attr"`
+	AdNetworkType1                      string       `xml:"network,attr"`
+	AdNetworkType2                      string       `xml:"networkWithSearchPartners,attr"`
+	AllConversions                      float64      `xml:"allConv,attr"`
+	AllConversionValue                  float64      `xml:"allConvValue,attr"`
+	AveragePosition                     int64        `xml:"avgPosition,attr"`
+	CampaignId                          string       `xml:"campaignID,attr"`
+	CampaignName                        string       `xml:"campaign,attr"`
+	CampaignStatus                      string       `xml:"campaignState,attr"`
+	CityCriteriaId                      string       `xml:"city,attr"`
+	Clicks                              int64        `xml:"clicks,attr"`
+	Conversions                         int64        `xml:"conversions,attr"`
+	ConversionValue                     float64      `xml:"totalConvValue,attr"`
+	ConvertedClicks                     int64        `xml:"convertedClicks,attr"`
+	CountryCriteriaId                   string       `xml:"countryTerritory,attr"`
+	CrossDeviceConversions              float64      `xml:"crossDeviceConv,attr"`
+	CustomerDescriptiveName             string       `xml:"clientName,attr"`
+	Date                                string       `xml:"day,attr"`
+	Device                              string       `xml:"device,attr"`
+	ExternalCustomerId                  string       `xml:"customerID,attr"`
+	Impressions                         int64        `xml:"impressions,attr"`
+	Interactions                        int64        `xml:"interactions,attr"`
+	IsTargetingLocation                 string       `xml:"isTargetable,attr"`
+	LocationType                        string       `xml:"locationType,attr"`
+	MetroCriteriaId                     string       `xml:"metroArea,attr"`
+	MostSpecificCriteriaId              float64      `xml:"mostSpecificLocation,attr"`
+	PrimaryCompanyName                  string       `xml:"companyName,attr"`
+	RegionCriteriaId                    string       `xml:"region,attr"`
+	VideoViews                          int64        `xml:"views,attr"`
+	ViewThroughConversions              int64        `xml:"viewThroughConv,attr"`
+}
+
+type GeoPerformanceRows []*GeoPerformanceRow
+
+type KeywordsPerformanceReport struct {
+	XMLName xml.Name       `xml:"report"`
+	Rows    VideoPerformanceRows  `xml:"table>row"`
+}
+
+type KeywordsPerformanceRow struct {
+	XMLName                  xml.Name   `xml:"row"`
+	AccountCurrencyCode               string       `xml:"currency,attr"`
+	AccountDescriptiveName            string       `xml:"account,attr"`
+	AccountTimeZoneId                 string       `xml:"timeZone,attr"`
+	ActiveViewImpressions             int64        `xml:"activeViewViewableImpressions,attr"`
+	ActiveViewMeasurability           float64      `xml:"activeViewMeasurableImprImpr,attr"`
+	ActiveViewMeasurableImpressions   int64        `xml:"activeViewMeasurableImpr,attr"`
+	ActiveViewViewability             float64      `xml:"activeViewViewableImprMeasurableImpr,attr"`
+	AdGroupId                         string       `xml:"adGroupID,attr"`
+	AdGroupName                       string       `xml:"adGroup,attr"`
+	AdGroupStatus                     string       `xml:"adGroupState,attr"`
+	AdNetworkType1                    string       `xml:"network,attr"`
+	AdNetworkType2                    string       `xml:"networkWithSearchPartners,attr"`
+	AllConversions                    float64      `xml:"allConv,attr"`
+	AllConversionValue                float64      `xml:"allConvValue,attr"`
+	ApprovalStatus                    string       `xml:"approvalStatus,attr"`
+	BaseAdGroupId                     float64      `xml:"baseAdGroupID,attr"`
+	BaseCampaignId                    string       `xml:"baseCampaignID,attr"`
+	BiddingStrategyId                 int64        `xml:"bidStrategyID,attr"`
+	BiddingStrategyName               string       `xml:"bidStrategyName,attr"`
+	BiddingStrategySource             string       `xml:"biddingStrategySource,attr"`
+	BiddingStrategyType               string       `xml:"bidStrategyType,attr"`
+	BidType                           float64      `xml:"conversionOptimizerBidType,attr"`
+	CampaignId                        string       `xml:"campaignID,attr"`
+	CampaignName                      string       `xml:"campaign,attr"`
+	CampaignStatus                    string       `xml:"campaignState,attr"`
+	Clicks                            int64        `xml:"clicks,attr"`
+	Cost                              int64        `xml:"cost,attr"`
+	Criteria                          string       `xml:"keyword,attr"`
+	CriteriaDestinationUrl            string       `xml:"destinationURL,attr"`
+	CustomerDescriptiveName           string       `xml:"clientName,attr"`
+	Date                              string       `xml:"day,attr"`
+	Engagements                       int64        `xml:"engagements,attr"`
+	EnhancedCpcEnabled                string       `xml:"enhancedCPCEnabled,attr"`
+	ExternalCustomerId                string       `xml:"customerID,attr"`
+	FinalAppUrls                      string       `xml:"appFinalURL,attr"`
+	FinalMobileUrls                   string       `xml:"mobileFinalURL,attr"`
+	FinalUrls                         string       `xml:"finalURL,attr"`
+	GmailForwards                     int64        `xml:"gmailForwards,attr"`
+	GmailSaves                        int64        `xml:"gmailSaves,attr"`
+	GmailSecondaryClicks              int64        `xml:"gmailClicksToWebsite,attr"`
+	Id                                string       `xml:"keywordID,attr"`
+	Impressions                       int64        `xml:"impressions,attr"`
+	Interactions                      int64        `xml:"interactions,attr"`
+	IsNegative                        string       `xml:"isNegative,attr"`
+	LabelIds                          string       `xml:"labelIDs,attr"`
+	Labels                            string       `xml:"labels,attr"`
+	PrimaryCompanyName                string       `xml:"companyName,attr"`
+	Status                            string       `xml:"keywordState,attr"`
+	VideoQuartile100Rate              float64      `xml:"videoPlayedTo100,attr"`
+	VideoQuartile25Rate               float64      `xml:"videoPlayedTo25,attr"`
+	VideoQuartile50Rate               float64      `xml:"videoPlayedTo50,attr"`
+	VideoQuartile75Rate               float64      `xml:"videoPlayedTo75,attr"`
+	VideoViews                        int64        `xml:"views,attr"`
+	ViewThroughConversions            int64        `xml:"viewThroughConv,attr"`
+}
+
+type KeywordsPerformanceRows []*KeywordsPerformanceRow
+
+type AccountPerformanceReport struct {
+	XMLName xml.Name       `xml:"report"`
+	Rows    VideoPerformanceRows  `xml:"table>row"`
+}
+
+type AccountPerformanceRow struct {
+	XMLName                        xml.Name `xml:"row"`
+	AccountCurrencyCode            string   `xml:"currency,attr"`
+	AccountDescriptiveName         string   `xml:"account,attr"`
+	AccountTimeZoneId              string   `xml:"timeZone,attr"`
+	AdNetworkType1                 string   `xml:"network,attr"`
+	AdNetworkType2                 string   `xml:"networkWithSearchPartners,attr"`
+	CanManageClients               string   `xml:"canManageClients,attr"`
+	Clicks                         int64    `xml:"clicks,attr"`
+	Conversions                    int64    `xml:"conversions,attr"`
+	ConversionValue                float64  `xml:"totalConvValue,attr"`
+	Cost                           int64    `xml:"cost,attr"`
+	CustomerDescriptiveName        string   `xml:"clientName,attr"`
+	Date                           string   `xml:"day,attr"`
+	Device                         string   `xml:"device,attr"`
+	Engagements                    int64    `xml:"engagements,attr"`
+	ExternalCustomerId             string   `xml:"customerID,attr"`
+	HourOfDay                      int64    `xml:"hourOfDay,attr"`
+	Impressions                    int64    `xml:"impressions,attr"`
+	Interactions                   int64    `xml:"interactions,attr"`
+	IsTestAccount                  string   `xml:"testAccount,attr"`
+	PrimaryCompanyName             string   `xml:"companyName,attr"`
+	VideoViews                     int64    `xml:"views,attr"`
+}
+
+type AccountPerformanceRows []*AccountPerformanceRow
 
 type ReportDefinition struct {
 	XMLName                xml.Name `xml:"reportDefinition"`
@@ -541,6 +822,132 @@ func (s *ReportUtils) DownloadPlacementPerformaceReport(reportDefinition *Report
 	}
 
 	report = PlacementReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadPlaceholderFeedReport(reportDefinition *ReportDefinition) (report PlaceholderReport, err error) {
+	reportDefinition.ReportType = "PLACEHOLDER_FEED_ITEM_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = PlaceholderReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadGeoPerformanceReport(reportDefinition *ReportDefinition) (report GeoPerformanceReport, err error) {
+	reportDefinition.ReportType = "GEO_PERFORMANCE_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = GeoPerformanceReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadVideoPerformanceReport(reportDefinition *ReportDefinition) (report VideoPerformanceReport, err error) {
+	reportDefinition.ReportType = "VIDEO_PERFORMANCE_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = VideoPerformanceReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadKeywordsPerformanceReport(reportDefinition *ReportDefinition) (report KeywordsPerformanceReport, err error) {
+	reportDefinition.ReportType = "KEYWORDS_PERFORMANCE_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = KeywordsPerformanceReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadAdPerformanceReport(reportDefinition *ReportDefinition) (report AdPerformanceReport, err error) {
+	reportDefinition.ReportType = "AD_PERFORMANCE_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = AdPerformanceReport{}
+	err = xml.Unmarshal([]byte(respBody), &report)
+
+	if err != nil {
+		return report, err
+	}
+
+	return report, err
+}
+
+func (s *ReportUtils) DownloadAccountPerformanceReport(reportDefinition *ReportDefinition) (report AccountPerformanceReport, err error) {
+	reportDefinition.ReportType = "ACCOUNT_PERFORMANCE_REPORT"
+
+	respBody, err := s.Auth.downloadReportRequest(
+		reportDefinition,
+	)
+
+	if err != nil {
+		return report, err
+	}
+
+	report = AccountPerformanceReport{}
 	err = xml.Unmarshal([]byte(respBody), &report)
 
 	if err != nil {
